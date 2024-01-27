@@ -3,6 +3,8 @@ from . import views
 from django.urls import include
 
 urlpatterns = [
-    path('', views.TaskListView.as_view(), name='tasks'),
+    path('', views.LandingPageView.as_view(), name='index'),
+    path('tasks/', views.TaskListView.as_view(), name='tasks'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('add_todo/', views.add_todo_item, name='add_todo'),
 ]

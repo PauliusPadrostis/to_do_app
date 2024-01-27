@@ -16,6 +16,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        {% block TaskListCSS %} {% endblock %}
     </head>
     <body id="page-top">
 
@@ -31,6 +32,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Register</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="tasks">Tasks</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Login</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Contact</a></li>
                     </ul>
@@ -38,14 +40,22 @@
             </div>
         </nav>
 
-        {% block Masthead %}
-        {% endblock %}
+        {% block Masthead %}{% endblock %}
 
-        {% block Portfolio %}
-        {% endblock %}
+        {% block Portfolio %}{% endblock %}
 
-        {% block About %}
-        {% endblock %}
+        <section class="page-section bg-primary text-white mb-0">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-sm">
+                        {% block "Content" %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% block About %}{% endblock %}
+
 
         <!-- Footer-->
         <footer class="footer text-center">
