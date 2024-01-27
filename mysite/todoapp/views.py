@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.views import generic
 from .models import *
 from .forms import TodoItemForm
@@ -35,5 +36,16 @@ def add_todo_item(request):
         form = TodoItemForm()
 
     return render(request, 'tasklist.html', {'form': form})
+
+
+class DeleteTodoView(generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy('tasks')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return JsonResponse({'success': True,})
+
 
 
