@@ -1,12 +1,14 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from .models import *
 from .forms import TodoItemForm
-from django.http import JsonResponse, HttpResponseRedirect
-from django.contrib.auth import logout
+from django.http import JsonResponse
+from django.contrib.auth import logout,  login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import  UserCreationForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -75,6 +77,21 @@ class UpdateTodoView(generic.UpdateView):
 def custom_logout(request):
     logout(request)
     return redirect('index')
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Optionally, log the user in after registration
+            login(request, user)
+            messages.success(request, "Registration successful.")
+            return redirect('index')  # Redirect to a desired page after registration
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
+
 
 
 
