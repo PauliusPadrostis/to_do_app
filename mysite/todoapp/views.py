@@ -50,7 +50,7 @@ class DeleteTodoView(generic.DeleteView):
 
 class UpdateTodoView(generic.UpdateView):
     model = Task
-    fields = ['task', 'due_date']
+    fields = ['task', 'due_date', 'status']
     success_url = reverse_lazy('tasks')
     template_name = 'edit_todo.html'
 

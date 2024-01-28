@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %}Task List{% endblock %}
 {% block TaskListCSS %}
 <link href="{% static 'css/todo.css' %}" rel="stylesheet"/> {% endblock %}
@@ -35,21 +36,7 @@
                             </div>
                         </div>
                         <hr class="my-4">
-                        <div class="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
-                            <p class="small mb-0 me-2 text-muted">Filter</p>
-                            <select class="select">
-                                <option value="" selected disabled>Select status</option>
-                                    {% for status_code, status_label in status_choices %}
-                                        <option value="{{ status_code }}">{{ status_label }}</option>
-                                    {% endfor %}
-                            </select>
-                            <p class="small mb-0 ms-4 me-2 text-muted">Sort</p>
-                            <select class="select">
-                                <option value="1">Added date</option>
-                                <option value="2">Due date</option>
-                            </select>
-                            <a href="#!" style="color: #23af89;" data-mdb-toggle="tooltip" title="Ascending"><i class="fas fa-sort-amount-down-alt ms-2"></i></a>
-                        </div>
+
 
                         {% for item in task %}
                             <ul id="taskList" class="list-group list-group-horizontal rounded-0 mb-2">
@@ -66,6 +53,15 @@
                                     <p class="lead fw-normal mb-0 bg-light w-100 ms-n2 ps-2 py-1 rounded">{{item.task}}</p>
                                 </li>
 
+                                <!-- Status field -->
+                                <li class="list-group-item px-3 py-1 d-flex align-items-center border-0 bg-transparent">
+                                    <div class="py-2 px-3 me-2 border border-warning rounded-3 d-flex align-items-center bg-light">
+                                        <p class="small mb-0" data-mdb-toggle="tooltip" title="Status">
+                                            {{item.get_status_display}}
+                                        </p>
+                                    </div>
+                                </li>
+
                                 <!-- Task due identifier -->
                                 <li class="list-group-item px-3 py-1 d-flex align-items-center border-0 bg-transparent">
                                     <div class="py-2 px-3 me-2 border border-warning rounded-3 d-flex align-items-center bg-light">
@@ -77,6 +73,7 @@
                                         </p>
                                     </div>
                                 </li>
+
 
                                 <!-- Edit icon -->
                                 <li class="list-group-item ps-1 mt-1  rounded-0 border-0 bg-transparent">
