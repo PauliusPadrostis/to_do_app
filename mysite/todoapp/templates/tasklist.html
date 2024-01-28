@@ -25,8 +25,8 @@
                                     <form id="TodoItemForm" method="post" action="{% url 'add_todo' %}">
                                         {% csrf_token %}
                                         <div class="d-flex flex-row align-items-center">
-                                            <input type="text" name="task" class=" border-0 bg-transparent form-control form-control-lg" id="exampleFormControlInput1" placeholder="Add new...">
-                                                <div class="status-select-wrapper me-3" style="margin-left: auto; border: 1px solid #ccc; border-radius: 5px; padding: 5px; width: 15vw;">
+                                            <input type="text" name="task" class="me-3 border-0 bg-transparent form-control form-control-lg" id="exampleFormControlInput1" placeholder="Add new...">
+                                                <div class="status-select-wrapper me-2" style="margin-left: auto; border: 1px solid #ccc; border-radius: 5px; padding: 5px; width: 15vw;">
                                                     <select name="status" class=" border-0 bg-transparent form-control">
                                                         <option value="">Select Status</option>
                                                         {% for value, display in status_choices %}
@@ -87,7 +87,7 @@
                                     <div class="py-2 px-3 border rounded-3 d-flex justify-content-center align-items-center {% if item.is_past_due %}bg-danger{% else %}bg-light{% endif %}" style="width: 100%;">
                                         <p class="small mb-0">
                                             <a href="#!" data-mdb-toggle="tooltip" title="Due on date">
-                                                <i class="fas fa-hourglass-half me-2"></i>
+                                                <i class="far fa-clock me-2"></i>
                                             </a>
                                             {{item.due_date}}
                                         </p>
