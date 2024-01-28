@@ -6,7 +6,7 @@ from django.urls import reverse
 # Create your models here.
 class Task(models.Model):
     task = models.CharField(verbose_name='Task', max_length=200)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     creation_date = models.DateTimeField(verbose_name='Task created', auto_now_add=True)
     due_date = models.DateField(verbose_name='Due on', blank=True, null=True)
 

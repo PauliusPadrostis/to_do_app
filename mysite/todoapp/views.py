@@ -4,12 +4,14 @@ from django.views import generic
 from .models import *
 from .forms import TodoItemForm
 from django.http import JsonResponse, HttpResponseRedirect
+from django.contrib.auth import logout
 
 
 # Create your views here.
 
 class LandingPageView(generic.TemplateView):
     template_name = 'index.html'
+
 
 
 class TaskListView(generic.ListView):
@@ -62,6 +64,11 @@ class UpdateTodoView(generic.UpdateView):
         context = super().get_context_data(**kwargs)
         context['task'] = Task.objects.all()
         return context
+
+
+def custom_logout(request):
+    logout(request)
+    return redirect('index')
 
 
 
