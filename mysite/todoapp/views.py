@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
@@ -5,16 +6,16 @@ from .models import *
 from .forms import TodoItemForm
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth import logout
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
+
 
 class LandingPageView(generic.TemplateView):
     template_name = 'index.html'
 
 
-
-class TaskListView(generic.ListView):
+class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     template_name = 'tasklist.html'
     context_object_name = 'task'
@@ -24,12 +25,17 @@ class TaskListView(generic.ListView):
         context['status_choices'] = Task.COMPLETION_STATUS
         return context
 
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user)
 
+
+@login_required
 def add_todo_item(request):
     if request.method == 'POST':
         form = TodoItemForm(request.POST)
         if form.is_valid():
             task = form.save(commit=False)
+            task.user = request.user
             task.save()
             return JsonResponse({'success': True, 'task_id': task.id})
         else:
