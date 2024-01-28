@@ -1,6 +1,9 @@
+from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views import generic
 from .models import *
 from .forms import TodoItemForm
@@ -28,7 +31,13 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        return Task.objects.filter(user=self.request.user)
+        current_date = timezone.now().date()
+        tasks = Task.objects.filter(user=self.request.user)
+
+        for task in tasks:
+            task.is_past_due = task.due_date is not None and task.due_date < current_date
+
+        return tasks
 
 
 @login_required
@@ -91,6 +100,10 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
+class ContactView(generic.TemplateView):
+    template_name = 'contact.html'
 
 
 

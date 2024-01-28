@@ -12,4 +12,5 @@ urlpatterns = [
     path('update_todo/<int:pk>/update', views.UpdateTodoView.as_view(), name='update_todo'),
     path('logout/', views.custom_logout, name='logout'),
     path('register/', views.register, name='register'),
+    path('contact/', views.ContactView.as_view(), name='contact'),
 ]
