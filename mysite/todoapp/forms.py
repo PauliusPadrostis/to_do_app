@@ -2,12 +2,13 @@ from django import forms
 from .models import Task
 
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class TodoItemForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['task', 'due_date', 'status']
+        widgets = {'due_date': DateInput()}
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Customize the status field widget to use a select input
-        self.fields['status'].widget = forms.Select(attrs={'class': 'form-control'})

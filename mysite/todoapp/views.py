@@ -50,9 +50,10 @@ class DeleteTodoView(generic.DeleteView):
 
 class UpdateTodoView(generic.UpdateView):
     model = Task
-    fields = ['task', 'due_date', 'status']
+    # fields = ['task', 'due_date', 'status']
     success_url = reverse_lazy('tasks')
     template_name = 'edit_todo.html'
+    form_class = TodoItemForm
 
     def form_valid(self, form):
         return super().form_valid(form)
