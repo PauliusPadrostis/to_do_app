@@ -34,7 +34,7 @@
                                                         {% endfor %}
                                                     </select>
                                                 </div>
-                                            <a href="#!" data-mdb-toggle="tooltip" title="Set due date"><i class="fas fa-calendar-alt fa-lg me-3"></i></a>
+                                            <a href="#!" data-mdb-toggle="tooltip" title="Set due date"></a>
                                             <div>
                                                 <button type="button" id="addTaskButton" class="btn btn-primary">Add</button>
                                             </div>
@@ -45,6 +45,15 @@
                         </div>
                         <hr class="my-4">
 
+                        <div class="header-row d-flex">
+                        <div class="header-item" style="width: 6%;"> <!-- Adjust width as needed -->
+                            <!-- Empty for the checkbox -->
+                        </div>
+                        <div class="header-item" style="flex-grow: 1; color: black; font-weight: bold; font-size: 20px;">Task items</div>
+                        <div class="header-item" style="width: 12%; color: black; font-weight: bold; font-size: 20px;">Status</div>
+                        <div class="header-item" style="width: 13%; color: black; font-weight: bold; font-size: 20px;">Due Date</div>
+                        <div class="header-item" style="width: 7.5%; color: black; font-weight: bold; font-size: 20px;">Actions</div>
+                        </div>
 
                         {% for item in task %}
                             <ul id="taskList" class="list-group list-group-horizontal rounded-0 mb-2">
@@ -57,13 +66,13 @@
                                 </li>
 
                                 <!-- Task item -->
-                                <li class="list-group-item px-3 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
+                                <li class="list-group-item px-1 py-1 d-flex align-items-center flex-grow-1 border-0 bg-transparent">
                                     <p class="lead fw-normal mb-0 bg-light w-100 ms-n2 ps-2 py-1 rounded">{{item.task}}</p>
                                 </li>
 
                                 <!-- Status field -->
-                                <li class="list-group-item px-3 py-1 d-flex align-items-center border-0 bg-transparent">
-                                    <div class="py-2 px-3 me-2 border border-warning rounded-3 d-flex align-items-center bg-light">
+                                <li class="list-group-item px-1 py-1 d-flex align-items-center border-0 bg-transparent">
+                                    <div class="py-2 px-3  border border-warning rounded-3 d-flex align-items-center bg-light" style="width: 9vw;">
                                         <p class="small mb-0" data-mdb-toggle="tooltip" title="Status">
                                             {{item.get_status_display}}
                                         </p>
@@ -71,11 +80,11 @@
                                 </li>
 
                                 <!-- Task due identifier -->
-                                <li class="list-group-item px-3 py-1 d-flex align-items-center border-0 bg-transparent">
-                                    <div class="py-2 px-3 me-2 border border-warning rounded-3 d-flex align-items-center bg-light">
+                                <li class="list-group-item px-1 py-1 d-flex align-items-center border-0 bg-transparent" >
+                                    <div class="py-2 px-3 border rounded-3 d-flex align-items-center bg-light" style="width: 12vw;">
                                         <p class="small mb-0">
                                             <a href="#!" data-mdb-toggle="tooltip" title="Due on date">
-                                                <i class="fas fa-hourglass-half me-2 text-warning"></i>
+                                                <i class="fas fa-hourglass-half me-2"></i>
                                             </a>
                                             {{item.due_date}}
                                         </p>
@@ -84,7 +93,7 @@
 
 
                                 <!-- Edit icon -->
-                                <li class="list-group-item ps-1 mt-1  rounded-0 border-0 bg-transparent">
+                                <li class="list-group-item ps-1 mt-1 ms-3 rounded-0 border-0 bg-transparent">
                                     <div class="d-flex flex-row justify-content-end mb-1">
                                         <a href="{% url 'update_todo' pk=item.id %}" class="text-warning" data-mdb-toggle="tooltip" title="Edit"><i class="fas fa-pen-alt"></i></a>
                                     </div>
