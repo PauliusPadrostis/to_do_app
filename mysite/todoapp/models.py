@@ -16,7 +16,7 @@ class Task(models.Model):
         ('ca', 'Cancelled'),
         ('co', 'Completed'),
     )
-    status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='td', help_text='Task status')
+    status = models.CharField(max_length=2, choices=COMPLETION_STATUS, default='td')
 
     def __str__(self):
         return self.task
